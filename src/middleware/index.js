@@ -13,6 +13,23 @@ const hashPass = async (req, res, next) => {
   }
 };
 
+// find the user
+// compare password
+// 1 a. username incorrect
+// 1 b. password incorrect
+// 2. works
+
+const comparePass = async (req, res, next) => {
+  try {
+    await bcrypt.compare(req.body.password, res.body.password);
+    next();
+    res.status(201).json({ message: "success" });
+  } catch (error) {
+    res.status(501).json({ errormessage: error.message, error });
+  }
+};
+
 module.exports = {
   hashPass,
+  comparePass,
 };
