@@ -24,13 +24,7 @@ const getUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const newLogin = await User.findOne({
-      where: { userName: req.body.userName },
-    });
-    if (req.body.password === newLogin.password) {
-      res.status(201).json({ message: "success" });
-      return;
-    }
+    res.status(201).json({ message: "Logged in" });
   } catch (error) {
     res.status(500).json({ message: error.message, error });
   }

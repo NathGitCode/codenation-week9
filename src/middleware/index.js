@@ -21,9 +21,18 @@ const hashPass = async (req, res, next) => {
 
 const comparePass = async (req, res, next) => {
   try {
-    await bcrypt.compare(req.body.password, res.body.password);
+    const user = await User.findOne({ where: { userName: req.body.userName } });
+    if (!user) {
+      res.status(401).json({ message: "Invalid username" });
+      return;
+    }
+    const password = await bcrypt.compare(req.body.password, user.password);
+
+    if (!password) {
+      res.status(401).json({ message: "Invalid password" });
+      return;
+    }
     next();
-    res.status(201).json({ message: "success" });
   } catch (error) {
     res.status(501).json({ errormessage: error.message, error });
   }
