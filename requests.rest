@@ -1,0 +1,23 @@
+POST  http://localhost:5001/users/login
+content-type: application/json
+
+{
+  "userName" : "alan94",
+  "email" : "alan@gmail.com",
+  "password" : "beansontoast"
+}
+
+###
+
+GET http://localhost:5001/users/
+
+###
+
+POST  http://localhost:5001/users/register
+content-type: application/json
+
+{
+  "userName" : "alan94",
+  "email" : "alan@gmail.com",
+  "password" : "beansontoast"
+}
