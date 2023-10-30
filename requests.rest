@@ -1,10 +1,13 @@
+
+
+
 POST  http://localhost:5001/users/login
 content-type: application/json
 
 {
-  "userName" : "alan94",
-  "email" : "alan@gmail.com",
-  "password" : "beansontoast"
+  "userName" : "dave",
+  "email" : "dave@gmail.com",
+  "password" : "password"
 }
 
 ###
@@ -21,3 +24,22 @@ content-type: application/json
   "email" : "alan@gmail.com",
   "password" : "beansontoast"
 }
+
+###
+
+GET http://localhost:5001/contact
+
+###
+
+POST http://localhost:5001/contact
+content-type: application/json
+
+{
+  "country": "UK",
+  "city": "manchester",
+  "street": "noideastreet",
+  "phone": "012384891"
+}
+
+###
+GET http://localhost:5001/users/bob

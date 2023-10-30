@@ -1,4 +1,5 @@
 const User = require("./model");
+const jwt = require("jsonwebtoken");
 
 const addUser = async (req, res) => {
   try {
@@ -24,10 +25,30 @@ const getUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    res.status(201).json({ message: "Logged in" });
+    const token = await jwt.sign({ id: req.body.id }, process.env.SECRET_KEY);
+    console.log(token);
+    const returnMessage = {
+      message: "Logged in",
+      user: {
+        userName: req.body.userName,
+        token: token,
+      },
+    };
+    res.status(201).json(returnMessage);
   } catch (error) {
     res.status(500).json({ message: error.message, error });
   }
 };
 
-module.exports = { addUser, getUser, loginUser };
+const getInfoByUsername = async (req, res) => {
+  try {
+    const findByUsername = await User.findOne({
+      where: { userName: req.params.userName },
+    });
+    res.status(201).json({ message: "success", findByUsername });
+  } catch (error) {
+    res.status(500).json({ message: error.message, error });
+  }
+};
+
+module.exports = { addUser, getUser, loginUser, getInfoByUsername };
