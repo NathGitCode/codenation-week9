@@ -11,10 +11,10 @@ const {
 
 userRouter.post("/register", hashPass, addUser);
 
-userRouter.post("/login", comparePass, loginUser);
+userRouter.post("/login", tokenCheck, comparePass, loginUser);
 
 userRouter.get("/", getUser);
 
-userRouter.get("/:userName", getInfoByUsername);
+userRouter.get("/:userName", tokenCheck, getInfoByUsername);
 
 module.exports = userRouter;
